@@ -8,8 +8,7 @@
         android:id="@+id/itemSearch"
         android:icon="@drawable/ic_search"
         android:title="@string/menu_item_search"
-        app:showAsAction="ifRoom"
-        tools:showAsAction="always" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/itemConfig"
