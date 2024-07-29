@@ -45,9 +45,10 @@
         android:layout_height="0dp"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.7"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <SeekBar
+    <SeekBar
             android:id="@+id/seekBar"
             android:progressBackgroundTint="@color/night"
             android:layout_width="@dimen/scroll_height"
