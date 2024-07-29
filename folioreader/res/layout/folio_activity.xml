@@ -8,7 +8,6 @@
     tools:context="com.folioreader.ui.activity.FolioActivity"
     tools:menu="@menu/menu_main_folio">
 
-    <!-- test -->
     <com.folioreader.ui.view.DirectionalViewpager
         android:id="@+id/folioPageViewPager"
         android:layout_width="0dp"
