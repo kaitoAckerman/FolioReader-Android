@@ -42,7 +42,7 @@
         android:layout_marginRight="2dp"
         android:animateLayoutChanges="true"
         android:thumb="@drawable/thumb"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/indicatorLayout"

@@ -762,7 +762,7 @@ class FolioPageFragment : Fragment(),
         mFadeInAnimation = AnimationUtils.loadAnimation(activity, R.anim.fadein)
         mFadeInAnimation!!.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {
-                mScrollSeekbar!!.visibility = View.GONE
+                mScrollSeekbar!!.visibility = View.VISIBLE
             }
 
             override fun onAnimationEnd(animation: Animation) {
@@ -780,7 +780,7 @@ class FolioPageFragment : Fragment(),
             }
 
             override fun onAnimationEnd(animation: Animation) {
-                mScrollSeekbar!!.visibility = View.GONE
+                mScrollSeekbar!!.visibility = View.INVISIBLE
             }
 
             override fun onAnimationRepeat(animation: Animation) {
@@ -796,7 +796,7 @@ class FolioPageFragment : Fragment(),
     }
 
     fun fadeOutSeekBarIfVisible() {
-        if (mScrollSeekbar!!.visibility == View.GONE) {
+        if (mScrollSeekbar!!.visibility == View.VISIBLE) {
             mScrollSeekbar!!.startAnimation(mFadeOutAnimation)
         }
     }
