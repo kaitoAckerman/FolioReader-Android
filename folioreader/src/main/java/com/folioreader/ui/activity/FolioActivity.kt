@@ -291,19 +291,28 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         initActionBar()
         initMediaController()
 
-        if (ContextCompat.checkSelfPermission(
-                this@FolioActivity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this@FolioActivity,
-                Constants.getWriteExternalStoragePerms(),
-                Constants.WRITE_EXTERNAL_STORAGE_REQUEST
-            )
-        } else {
-            setupBook()
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    if (!Environment.isExternalStorageManager()) {
+        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:$packageName"))
+        startActivityForResult(intent, Constants.MANAGE_ALL_FILES_ACCESS_REQUEST)
+    } else {
+        setupBook()
+    }
+} else {
+    if (ContextCompat.checkSelfPermission(
+            this@FolioActivity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        ActivityCompat.requestPermissions(
+            this@FolioActivity,
+            Constants.getWriteExternalStoragePerms(),
+            Constants.WRITE_EXTERNAL_STORAGE_REQUEST
+        )
+    } else {
+        setupBook()
+    }
+}
     }
 
     private fun initActionBar() {
@@ -802,6 +811,15 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == Constants.MANAGE_ALL_FILES_ACCESS_REQUEST) {
+        if (Environment.isExternalStorageManager()) {
+            setupBook()
+        } else {
+            // Handle the case where the permission is not granted
+        }
+    }
 
         if (requestCode == RequestCode.SEARCH.value) {
             Log.v(LOG_TAG, "-> onActivityResult -> " + RequestCode.SEARCH)
